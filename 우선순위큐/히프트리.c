@@ -41,10 +41,8 @@ element delete_max_heap(HeapType* h) {
     temp = h->heap[(h->heap_size)--];
     parent = 1;
     child = 2;
-    /* 오른쪽에 자식 노드가 있는지 확인 &&
-       왼쪽과 오른쪽 자식 노드의 key 값을 비교한 후, 만약 오른쪽 값이 더 크면 child++를 통해서 오른쪽 노드와 비교 */
     while (child <= h->heap_size) {
-        if ((child < h->heap_size) && (h->heap[child].key) < h->heap[child + 1].key) child++;
+        if ((child < h->heap_size) && (h->heap[child].key < h->heap[child + 1].key)) child++;
         if (temp.key >= h->heap[child].key) break;
         h->heap[parent] = h->heap[child];
         parent = child;
