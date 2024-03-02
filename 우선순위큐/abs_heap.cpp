@@ -1,42 +1,33 @@
 #include <iostream>
-#include <cstdlib>
-#define MAX_SIZE 100003
+#define MAX_ELEMENT 100003
 using namespace std;
 typedef struct {
-    int heap[MAX_SIZE];
-    int size;
+    int heap[MAX_ELEMENT];
+    int heap_size;
 } HeapType;
-HeapType* createHeap() {
-    HeapType* h = (HeapType *)malloc(sizeof(HeapType));
-    h->size = 0;
+HeapType *createHeap() {
+    HeapType *h = (HeapType *)malloc(sizeof(HeapType));
+    h->heap_size = 0;
     return h;
 }
-/* modify soon */
 void insertHeap(HeapType *h, int item) {
     int i = 0;
-    i = ++(h->size);
-    while (i != 1 && abs(item) <= abs(h->heap[i / 2])) {
-        if (abs(item) <= abs(h->heap[i / 2]) && item < h->heap[i / 2]) {
-            h->heap[i] = h->heap[i / 2];
-            i /= 2;
-        }
+    i = ++(h->heap_size);
+    while (i != 1 && item < h->heap[i / 2]) {
+        h->heap[i] = h->heap[i / 2];
+        i /= 2;
     }
     h->heap[i] = item;
 }
-/* modify soon */
 int deleteHeap(HeapType *h) {
-    if (h->size == 0) return 0;
-    int item = h->heap[1];
-    int temp = h->heap[(h->size)--];
+    if (h->heap_size == 0) return 0;
+    int item, temp = 0;
     int parent = 1;
     int child = 2;
-    while (child <= h->size) {
-        if (child < h->size) {
-            if (abs(h->heap[child]) > abs(h->heap[child + 1])) child++;
-            else if (abs(h->heap[child]) == abs(h->heap[child + 1])) {
-                if (h->heap[child] > h->heap[child + 1]) child++;
-            }
-        }
+    item = h->heap[1];
+    temp = h->heap[(h->heap_size)--];
+    while (child <= h->heap_size) {
+        if (child < h->heap_size && h->heap[child] > h->heap[(child + 1)]) child++;
         if (temp < h->heap[child]) break;
         else {
             h->heap[parent] = h->heap[child];
@@ -48,13 +39,15 @@ int deleteHeap(HeapType *h) {
     return item;
 }
 int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
     int n = 0;
     cin >> n;
-    HeapType *h = (HeapType *)malloc(sizeof(HeapType));
+    HeapType *h = createHeap();
     for (int i = 0; i < n; i++) {
         int temp = 0;
         cin >> temp;
-        if (temp == 0) cout << deleteHeap(h) << endl;
+        if (temp == 0) cout << deleteHeap(h) << "\n";
         else insertHeap(h, temp);
     }
     free(h);
