@@ -11,6 +11,7 @@ HeapType* createHeap() {
     h->size = 0;
     return h;
 }
+/* modify soon */
 void insertHeap(HeapType *h, int item) {
     int i = 0;
     i = ++(h->size);
@@ -22,6 +23,7 @@ void insertHeap(HeapType *h, int item) {
     }
     h->heap[i] = item;
 }
+/* modify soon */
 int deleteHeap(HeapType *h) {
     if (h->size == 0) return 0;
     int item = h->heap[1];
