@@ -16,12 +16,10 @@ void insert_heap(HeapType *h, int item) {
         if (abs(item) == abs(h->heap[i / 2])) {
             if (item == h->heap[i / 2]) break;
             else if (item < h->heap[i / 2]) {
-            h->heap[i] = h->heap[i / 2];
-            i /= 2;
+                h->heap[i] = h->heap[i / 2];
+                i /= 2;
             }
-            else {
-                break;
-            }
+            else break;
         } 
         else if (abs(item) < abs(h->heap[i / 2])) {
             h->heap[i] = h->heap[i / 2];
