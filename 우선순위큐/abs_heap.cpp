@@ -13,11 +13,16 @@ HeapType *create() {
 void insert_heap(HeapType *h, int item) {
     int i = ++(h->heap_size);
     while (i != 1 && abs(item) <= abs(h->heap[i / 2])) {
-        if (item == h->heap[i / 2]) break;
-        if (item < h->heap[i / 2] && abs(item) == abs(h->heap[i / 2])) {
+        if (abs(item) == abs(h->heap[i / 2])) {
+            if (item == h->heap[i / 2]) break;
+            else if (item < h->heap[i / 2]) {
             h->heap[i] = h->heap[i / 2];
             i /= 2;
-        }
+            }
+            else {
+                break;
+            }
+        } 
         else if (abs(item) < abs(h->heap[i / 2])) {
             h->heap[i] = h->heap[i / 2];
             i /= 2;
@@ -32,7 +37,10 @@ int delete_heap(HeapType *h) {
     int parent = 1;
     int child = 2;
     while (child <= h->heap_size) {
-        if (child < h->heap_size && abs(h->heap[child]) > abs(h->heap[child + 1])) child++;
+        if (child < h->heap_size) {
+            if (abs(h->heap[child]) > abs(h->heap[child + 1])) child++;
+            else if (abs(h->heap[child]) == abs(h->heap[child + 1]) && h->heap[child] > h->heap[child + 1]) child++;
+        }
         if (abs(temp) < abs(h->heap[child])) break;
         else if (abs(temp) == abs(h->heap[child]) && temp < h->heap[child]) break;
         else {
