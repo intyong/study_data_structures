@@ -14,8 +14,7 @@ void insert_heap(HeapType *h, int item) {
     int i = ++(h->heap_size);
     while (i != 1 && abs(item) <= abs(h->heap[i / 2])) {
         if (abs(item) == abs(h->heap[i / 2])) {
-            if (item == h->heap[i / 2]) break;
-            else if (item < h->heap[i / 2]) {
+            if (item < h->heap[i / 2]) {
                 h->heap[i] = h->heap[i / 2];
                 i /= 2;
             }
