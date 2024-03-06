@@ -22,6 +22,7 @@ void insert_vertex(GraphType *g, int v) {
     }
     g->n++;
 }
+/* u와 v 사이에 간선을 만들어주는 함수 */
 void insert_edge(GraphType* g, int u, int v) {
     GraphNode *node;
     if (u >= g->n || v >= g->n) {
