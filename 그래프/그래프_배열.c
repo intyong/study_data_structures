@@ -13,7 +13,7 @@ void init(GraphType *g) {
         }
     }
 }
-/* 단순히 점점의 개수만 늘려주면 됨 */
+/* 단순히 정점의 개수만 늘려주면 됨 */
 void insert_vertex(GraphType *g, int v) {
     if (((g->n) + 1) > MAX_VERTICES) {
         fprintf(stderr, "그래프: 정점의 개수 초과");
