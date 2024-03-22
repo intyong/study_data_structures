@@ -1,6 +1,6 @@
 #include <stdio.h>
 #define MAX_TERMS 101
-typedef struct {
+typedef struct term {
     int row;
     int col;
     int value;

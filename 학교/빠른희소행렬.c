@@ -1,7 +1,7 @@
 #include <stdio.h>
 #define MAX_TERMS 101
 #define MAX_COL 50
-typedef struct {
+typedef struct term {
     int row;
     int col;
     int value;
@@ -43,6 +43,6 @@ int main() {
     for (int i = 0; i < 9; i++) {
         printf(" %d, %d, %d\n", b[i].row, b[i].col, b[i].value);
     }
-    
+
     return 0;
 }
