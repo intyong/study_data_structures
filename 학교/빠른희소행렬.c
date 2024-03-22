@@ -20,6 +20,9 @@ void fast_transpose(term a[], term b[]) {
         starting_pos[0] = 1;
         for (int i = 1; i < num_cols; i++) starting_pos[i] = starting_pos[i - 1] + row_terms[i - 1];
     }
+    b[0].row = a[0].col;
+    b[0].col = a[0].row;
+    b[0].value = a[0].value;
     for (int i = 1; i <= num_terms; i++) {
         int j = starting_pos[a[i].col];
         b[j].row = a[i].col;
@@ -31,5 +34,15 @@ void fast_transpose(term a[], term b[]) {
 int main() {
     term a[9] = {{6,6,8}, {0,0,15}, {0,3,22}, {0,5,-15}, {1,1,11}, {1,2,3}, {2,3,-6}, {4,0,91}, {5,2,28} };
     term b[9];
+    printf("row: %d, col: %d, value: %d\n", a[0].row, a[0].col, a[0].value);
+    for (int i = 0; i < 9; i++) {
+        printf(" %d, %d, %d\n", a[i].row, a[i].col, a[i].value);
+    }
     fast_transpose(a,b);
+    printf("row: %d, col: %d, value: %d\n", b[0].row, b[0].col, b[0].value);
+    for (int i = 0; i < 9; i++) {
+        printf(" %d, %d, %d\n", b[i].row, b[i].col, b[i].value);
+    }
+    
+    return 0;
 }
