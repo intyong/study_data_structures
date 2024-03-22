@@ -5,15 +5,17 @@ typedef struct term {
     int col;
     int value;
 } term;
-term a[MAX_TERMS];
+term a[MAX_TERMS];  // 배열 a의 0번째에는 행, 열, 요소의 개수가 저장되어 있음
 void transpose(term a[], term b[]) {
-    int n, currentb;
-    n = a[0].value; // 총 element 수
-    b[0].row = a[0].col;
-    b[0].col = a[0].row;
-    b[0].value = n;
+    int n;  // element의 개수를 저장하는 변수
+    int currentb;   // 전치 행렬의 인덱스가 되는 변수
+    n = a[0].value; // 전체 element 개수
+    b[0].row = a[0].col;    // 기존 행렬의 열의 개수를 "전치 행렬의 행의 개수로 배정"
+    b[0].col = a[0].row;    // 기존 행렬의 행의 개수를 "전치 행렬의 열의 개수로 배정"
+    b[0].value = n; // 전체 element 개수 배정
     if (n > 0) {
         currentb = 1;
+        /* a[]의 열의 개수만큼 반복 == b[]의 행만큼 반복 */
         for (int i = 0; i < a[0].col; i++) {
             for (int j = 1; j <= n; j++) {
                 if (a[j].col == i) {
