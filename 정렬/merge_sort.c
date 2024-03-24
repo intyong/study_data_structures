@@ -11,26 +11,22 @@ void merge(int list[], int left, int mid, int right) {
     j = mid + 1;
     k = left;   // sorted[]를 위한 인덱스
     while (i <= mid && j <= right) {
-        if (list[i] <= list[j]) {
-            sorted[k++] = list[i++];
-        }
-        else {
-            sorted[k++] = list[j++];
-        }
+        if (list[i] <= list[j]) sorted[k++] = list[i++];
+        else sorted[k++] = list[j++];
     }
     if (i > mid) {
-        for (l = j; l <= right; l++) {
-            sorted[k++] = list[l];
-        }
+        for (l = j; l <= right; l++) sorted[k++] = list[l];
     }
     else {
-        for (l = i; l <= mid; l++) {
-            sorted[k++] = list[l];
-        }
+        for (l = i; l <= mid; l++) sorted[k++] = list[l];
     }
     for (l = left; l <= right; l++) {
         list[l] = sorted[l];
     }
+    for (int i = 0; i < MAX_SIZE; i++) {
+        printf("%d ", list[i]);
+    }
+    printf("\n");
 }
 void merge_sort(int list[], int left, int right) {
     int mid;
