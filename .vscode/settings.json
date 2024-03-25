@@ -14,5 +14,6 @@
         "vector": "cpp",
         "iosfwd": "cpp",
         "kruskal_algorithm": "c"
-    }
+    },
+    "cmake.configureOnOpen": false
 }
