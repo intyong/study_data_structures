@@ -3,7 +3,7 @@
 #define TRUE 1
 #define FALSE 0
 #define MAX_VERTICES 100
-#define INF 1000
+#define INF 1000L
 int parent[MAX_VERTICES];   // 부모노드
 /* 부모 노드를 모두 -1로 초기화 */
 void set_init(int n) {
