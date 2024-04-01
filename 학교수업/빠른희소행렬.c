@@ -12,10 +12,13 @@ void fast_transpose(term a[], term b[]) {
     int row_terms[MAX_COL]; // 기존 행렬의 열마다 non-zero element가 몇 번 나오는지 저장
     int starting_pos[MAX_COL];  // 기존 행렬에서 이전 열의 non-zero element의 개수 누적합
     
-    int num_cols = a[0].col;
-    int num_terms = a[0].value;
+    int num_cols = a[0].col;    // 기존 행렬의 열의 개수 저장
+    int num_terms = a[0].value; // 기존 행렬의 term의 개수 저장 (non-zero element의 개수)
     if (num_terms > 0) {
+        /* 기존 행렬의 열의 개수만큼 row_terms를 초기화.
+           row_terms는 기존 행렬의 열마다 non-zeron element가 몇 번 나오는지를 저장하기 위한 것이기 때문이다. */
         for (int i = 0; i < num_cols; i++) row_terms[i] = 0;
+
         /* non-zero element만큼 반복하여 a[i].col을 인덱스로 row_terms의 개수를 더해줌 */
         for (int i = 1; i <= num_terms; i++) row_terms[a[i].col]++;
 
@@ -29,7 +32,7 @@ void fast_transpose(term a[], term b[]) {
     b[0].value = a[0].value;
     /* i는 a를 순회하기 위한 인덱스 */
     for (int i = 1; i <= num_terms; i++) {
-        /* a[i]를 순회하며 a[i].col이 시작하는 위치를 j에 저장
+        /* a[i]를 순회하며 a[i].col을 j에 저장
            그 인덱스 값으로 b[] 전치 
            마지막에 starting_pos[a[i].col]를 1만큼 늘려 
            다음에 그 행에 접근할 때는 그 다음 위치에 저장되도록 함 */
@@ -38,6 +41,7 @@ void fast_transpose(term a[], term b[]) {
         b[j].col = a[i].row;
         b[j].value = a[i].value;
         starting_pos[a[i].col]++;
+        printf("%d %d에 있던 거를 %d %d에 저장\n", a[i].row, a[i].col, b[j].row, b[j].col);
     }
 }
 int main() {
