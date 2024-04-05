@@ -13,7 +13,8 @@
         "unordered_map": "cpp",
         "vector": "cpp",
         "iosfwd": "cpp",
-        "kruskal_algorithm": "c"
+        "kruskal_algorithm": "c",
+        "limits.h": "c"
     },
     "cmake.configureOnOpen": false
 }
