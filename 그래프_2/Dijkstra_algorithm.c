@@ -11,32 +11,6 @@ typedef struct GraphType {
 } GraphType;
 int distance[MAX_VERTICES]; // 시작 정점으로부터의 최단 경로 거리
 int found[MAX_VERTICES];    // 방문한 정점 표시
-int choose(int distance[], int n, int found[]) {
-    int min = INT_MAX;
-    int minpos = -1;
-    for (int i = 0; i < n; i++) {
-        if (distance[i] < min && !found[i]) {
-            min = distance[i];
-            minpos = i;
-        }
-    }
-    return minpos;
-}
-void print_status(GraphType *g) {
-    static int step = 1;
-    printf("STEP %d: ", step++);
-    printf("distance: ");
-    for (int i = 0; i < g->n; i++) {
-        if (distance[i] == INF) printf(" * ");
-        else printf("%2d ", distance[i]);
-        printf("\n");
-        printf(" found: ");
-        for (int i = 0; i < g->n; i++) {
-            printf("%2d ", found[i]);
-        }
-        printf("\n\n");
-    }
-}
 void shortest_path(GraphType *g, int start) {
     int u;
     for (int i = 0; i < g->n; i++) {
@@ -57,6 +31,34 @@ void shortest_path(GraphType *g, int start) {
             }
         }
     }
+}
+int choose(int distance[], int n, int found[]) {
+    /* 현재 방문하지 않은 정점들 중에서 가장 거리가 짧은 애를 탐색
+       탐색된 정점을 기준으로 계속 탐색을 하는 것임 */
+    int min = INT_MAX;
+    int minpos = -1;
+    for (int i = 0; i < n; i++) {
+        if (distance[i] < min && !found[i]) {
+            min = distance[i];
+            minpos = i;
+        }
+    }
+    return minpos;
+}
+void print_status(GraphType *g) {
+    static int step = 1;
+    printf("STEP %d: ", step++);
+    printf("distance: ");
+    for (int i = 0; i < g->n; i++) {
+        if (distance[i] == INF) printf(" * ");
+        else printf("%2d ", distance[i]);
+    }
+        printf("\n");
+        printf(" found: ");
+        for (int i = 0; i < g->n; i++) {
+            printf("%2d ", found[i]);
+        }
+        printf("\n\n");
 }
 int main() {
     GraphType g = { 7,
