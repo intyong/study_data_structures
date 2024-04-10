@@ -16,7 +16,7 @@ void fast_transpose(term a[], term b[]) {
     int num_terms = a[0].value; // 기존 행렬의 term의 개수 저장 (non-zero element의 개수)
     if (num_terms > 0) {
         /* 기존 행렬의 열의 개수만큼 row_terms를 초기화.
-           row_terms는 기존 행렬의 열마다 non-zeron element가 몇 번 나오는지를 저장하기 위한 것이기 때문이다. */
+           row_terms는 기존 행렬의 열마다 non-zero element가 몇 번 나오는지를 저장하기 위한 것이기 때문이다. */
         for (int i = 0; i < num_cols; i++) row_terms[i] = 0;
 
         /* non-zero element만큼 반복하여 a[i].col을 인덱스로 row_terms의 개수를 더해줌 */
