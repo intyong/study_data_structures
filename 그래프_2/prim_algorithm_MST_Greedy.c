@@ -23,6 +23,8 @@ int get_min_vertex(int n) {
         }
     }
     for (int i = 0; i < n; i++) {
+        /* 인접하지 않은 정점일 경우 distance[]가 INF이기 때문에 애초에 인접 여부를 검사할 필요 없음
+           INF보다 작은 값으로 넘어올 경우 애초에 인접한 것임 */
         if (!seleted[i] && (distance[i] < distance[v])) v = i;
     }
     return v;
