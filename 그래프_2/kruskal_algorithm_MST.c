@@ -14,6 +14,7 @@ void set_init(int n) {
 /* curr가 속하는 집합을 반환한다. */
 int set_find(int curr) {
     if (parent[curr] == -1) return curr;
+    /* 계속해서 부모 노드를 따라가서 현 시점에서의 헤더노드 인덱스 반환 */
     while (parent[curr] == -1) curr = parent[curr];
     return curr;
 }
@@ -21,7 +22,7 @@ int set_find(int curr) {
 void set_union(int a, int b) {
     int root1 = set_find(a);
     int root2 = set_find(b);
-    if (root1 != root2) parent[root1] = root2;
+    if (root1 != root2) parent[root1] = root2;  // root1의 부모 노드를 root2로 설정해주면서 같은 집합으로 만들어줌
 }
 /* 간선을 나타내는 구조체 */
 struct Edge {
@@ -57,16 +58,17 @@ int compare(const void* a, const void* b) {
 void kruskal(GraphType *g) {
     int edge_accepted = 0;  // 현재까지 선택된 간선의 수
     int uset, vset; // 정점 u와 정점 v의 집합 번호
-    struct Edge e;
 
     set_init(g->n); // 부모 노드 집합 초기화
     qsort(g->edges, g->n, sizeof(struct Edge), compare);
     printf("크루스칼 최소 신장 트리 알고리즘 \n");
     int i = 0;
+    /* 최소 신장 트리의 간선의 개수는 최대 (g->n - 1)개 */
     while (edge_accepted < (g->n - 1)) {
-        e = g->edges[i];
-        uset = set_find(e.start);
-        vset = set_find(e.end);
+        struct Edge e = g->edges[i];    // 각 간선은 시작 정점의 위치, 도착 정점의 위치, 가중치를 가지고 있음
+        uset = set_find(e.start);   // 시작 정점의 부모노드를 찾음
+        vset = set_find(e.end); // 도착 정점의 부모노드를 찾음
+        /* 서로 다른 집합이라면 서로 합쳐주어도 됨, 즉 간선을 선택해도 됨 */
         if (uset != vset) {
             printf("간선 (%d, %d) %d 선택\n", e.start, e.end, e.weight);
             edge_accepted++;
