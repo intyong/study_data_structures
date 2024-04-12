@@ -15,7 +15,8 @@
         "iosfwd": "cpp",
         "kruskal_algorithm": "c",
         "limits.h": "c",
-        "stdlib.h": "c"
+        "stdlib.h": "c",
+        "stdio.h": "c"
     },
     "cmake.configureOnOpen": false
 }
