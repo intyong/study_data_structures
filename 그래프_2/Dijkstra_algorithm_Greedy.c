@@ -38,7 +38,7 @@ int choose(int distance[], int n, int found[]) {
     }
     return minpos;
 }
-void shortest_path(GraphType *g, int start) {
+void Dijkstra(GraphType *g, int start) {
     int u;
     /* 변수로 받은 시작 정점부터 다른 정점까지의 거리 초기화
        동시에 found[] 초기화 */
@@ -46,19 +46,25 @@ void shortest_path(GraphType *g, int start) {
         distance[i] = g->weight[start][i];  // 맨 처음 시작 정점을 기준으로 인접 정점들까지의 거리를 저장
         found[i] = FALSE;
     }
-    found[start] = TRUE;
+    found[start] = TRUE;    // 시작 정점을 방문 처리
     distance[start] = 0;
     /* 변수로 받은 시작 정점으로 반복문 시작 */
+    /* 가장 외곽의 반복문을 한 번 수행할 때마다 
+       방문하지 않은 노드 개수 하나씩 줄어들고, 방문한 노드의 개수는 하나씩 늘어난다고 생각하자 */
     for (int i = 0; i < (g->n) - 1; i++) {
         print_status(g);
         /* distance[] 배열과 found[] 배열을 참고하여 모든 정점을 탐색하는 함수
            시작 정점으로부터 최단 거리를 가진 정점의 인덱스가 반환됨 */
         u = choose(distance, g->n, found);
-        found[u] = TRUE;
+
+        found[u] = TRUE;    // 최단 거리를 가진 정점으로 이동 (방문 처리)
+
         /* 모든 정점을 탐색하며 u를 기준으로 인접 정점인 경우 (weight[u][w]가 무한대가 아닐 경우)
            현재 저장되어 있는 인접 정점까지의 거리보다 u를 거쳐 인접 정점으로 가는 게 더 짧으면 최단 거리 업데이트 */
         for (int w = 0; w < g->n; w++) {
             if (!found[w]) {
+                /* distance[u] + g->weight[u][w]가 distance[w]보다 작으려면 w가 u의 인접 정점이어야 함
+                   따라서 이 if문에는 u와 w가 인접 정점인지도 함께 판별하는 것임 */ 
                 if (distance[u] + g->weight[u][w] < distance[w]) {
                     distance[w] = distance[u] + g->weight[u][w];
                 }
@@ -76,7 +82,7 @@ int main() {
     {10, 6, INF, 9, INF, 0, INF},
     {INF, INF, INF, 4, 5, INF, 0} }
     };
-    shortest_path(&g, 0);
+    Dijkstra(&g, 0);
     
     return 0;
 }
