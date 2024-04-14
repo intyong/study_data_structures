@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define MAX_SIZE 10
+#define MAX_SIZE 8
 #define SWAP(x, y, t) ((t) = (x), (x) = (y), (y) = (t))
 int list[MAX_SIZE];
 int n;
@@ -31,10 +31,10 @@ void merge(int list[], int left, int mid, int right) {
 void merge_sort(int list[], int left, int right) {
     int mid;
     if (left < right) {
-        mid = (left + right) / 2;
-        merge_sort(list, left, mid);
-        merge_sort(list, mid + 1, right);
-        merge(list, left, mid, right);
+        mid = (left + right) / 2;   // divide
+        merge_sort(list, left, mid);    // conquer
+        merge_sort(list, mid + 1, right);   // conquer
+        merge(list, left, mid, right);  // combine
     }
 }
 int main() {
@@ -47,7 +47,8 @@ int main() {
         printf("%d ", list[i]);
     }
     printf("\nafter merge sorting\n");
-    merge_sort(list, 0, n);
+    merge_sort(list, 0, n - 1);
+    printf("Result: ");
     for (int i = 0; i < MAX_SIZE; i++) {
         printf("%d ", list[i]);
     }

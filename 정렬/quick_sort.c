@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #define MAX_SIZE 5
 #define SWAP(x, y, t) ((t) = (x), (x) = (y), (y) = (t))
-int list[MAX_SIZE] = {2, 5, 1, 4, 3};
+int list[MAX_SIZE] = {5, 4, 3, 2, 1};
 int n;
 int partition(int list[], int left, int right) {
     int pivot, temp;
