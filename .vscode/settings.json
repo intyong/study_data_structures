@@ -16,7 +16,8 @@
         "kruskal_algorithm": "c",
         "limits.h": "c",
         "stdlib.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "string.h": "c"
     },
     "cmake.configureOnOpen": false
 }

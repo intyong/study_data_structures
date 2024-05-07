@@ -1,3 +1,7 @@
+/* ⭐️ SSSP 알고리즘
+   시작 지점에서부터 모든 지점까지의 최단 거리를 계산
+   시작 지점을 기준으로 인접 노드 중 가장 가까운 정점으로 이동
+   RELAX 과정을 통하여 각 반복마다 최단 거리를 업데이트 ⭐️ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>

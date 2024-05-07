@@ -1,3 +1,6 @@
+/* ⭐️ 간선을 모두 나열하여 오름차순으로 정렬하고
+   하나씩 선택하면서 사이클을 만들지 않을 경우에 선택
+   사이클 검사를 한 번씩 해야함, find and union 이용 ⭐️ */
 #include <stdio.h>
 #include <stdlib.h>
 #define TRUE 1

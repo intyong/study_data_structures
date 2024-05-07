@@ -1,3 +1,7 @@
+/* ⭐️ 시작점을 기준으로 가장 가까운 노드 선택
+   선택한 노드를 집합 Y에 넣어주고
+   V - Y에서 다시 가장 가까운 노드를 선택
+   V == Y가 되면 MST 완성 ⭐️ */
 #include <stdio.h>
 #include <stdlib.h>
 #define TRUE 1

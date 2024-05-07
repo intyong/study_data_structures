@@ -37,12 +37,13 @@ ListNode* insert_last(ListNode* head, element data) {
 int get_length(ListNode *head) {
     int result = 0;
     if (head == NULL) return result;
-    else {
-        ListNode *p;
-        p = head -> link;
-        for (; p != head; p = p->link) result++;
-        if (p == head) result++;    
-    }
+    result = 1;
+    ListNode *p;
+    p = head->link;
+    do {
+        result++;
+        p = p->link;
+    } while(p != head);
     return result;
 }
 void print_list(ListNode *head) {
@@ -62,6 +63,7 @@ int main() {
     head = insert_last(head, 40);
     head = insert_first(head, 10);
     print_list(head);
+    printf("\n%d\n", get_length(head));
 
     return 0;
 }
