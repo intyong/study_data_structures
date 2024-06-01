@@ -8,7 +8,7 @@ typedef struct TreeNode{
 int traversal(TreeNode* root, int prevMax) {
     if (root == NULL) return 0;
     int GoodNode = 0;
-    /* GoodNode인지 아닌지를 검사하는 거만 다름 */
+    
     if (root->val >= prevMax) {
         GoodNode = 1;
         prevMax = root->val;

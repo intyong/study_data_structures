@@ -7,8 +7,8 @@ typedef struct TreeNode {
 } TreeNode;
 int isBSTNode(TreeNode *root) {
     if (root == NULL) return 1;
-    if ((root->left != NULL && root->val > root->left->val) && 
-        (root->right != NULL && root->val < root->right->val))
+    if ((root->left == NULL || root->val > root->left->val) && 
+        (root->right == NULL || root->val < root->right->val))
         return 1;
     return 0;
 }
