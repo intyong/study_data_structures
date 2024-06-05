@@ -17,7 +17,9 @@
         "limits.h": "c",
         "stdlib.h": "c",
         "stdio.h": "c",
-        "string.h": "c"
+        "string.h": "c",
+        "__node_handle": "c",
+        "ios": "c"
     },
     "cmake.configureOnOpen": false
 }
