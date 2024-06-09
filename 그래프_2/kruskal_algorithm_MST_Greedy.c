@@ -18,7 +18,7 @@ void set_init(int n) {
 int set_find(int curr) {
     if (parent[curr] == -1) return curr;
     /* 계속해서 부모 노드를 따라가서 현 시점에서의 헤더노드 인덱스 반환 */
-    while (parent[curr] == -1) curr = parent[curr];
+    while (parent[curr] != -1) curr = parent[curr];
     return curr;
 }
 /* 두 개의 원소가 속한 집합을 합친다. */
