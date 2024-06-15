@@ -1,73 +1,61 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <limits.h>
-#define TRUE 1
-#define FALSE 0
-#define MAX_VERTICES 100
-#define INF 1000000
 
-typedef struct GraphType {
-    int n;
-    int weight[MAX_VERTICES][MAX_VERTICES];
-} GraphType;
+#define INF 1000000 // 무한대를 나타내기 위한 큰 값
 
-int distance[MAX_VERTICES]; // 시작 정점으로부터의 최단 경로 거리
+struct Edge {
+    int u, v, weight;
+};
 
-void print_status(GraphType *g) {
-    static int step = 1;
-    printf("STEP %d: ", step++);
-    printf("distance: ");
-    for (int i = 0; i < g->n; i++) {
-        if (distance[i] == INF) printf(" * ");
-        else printf("%2d ", distance[i]);
-    }
-    printf("\n\n");
-}
-
-void bellman_ford(GraphType *g, int start) {
-    // 시작 정점부터의 최단 경로 초기화
-    for (int i = 0; i < g->n; i++) {
+void bellmanFord(int vertices, int edges, struct Edge edgeList[], int start) {
+    int distance[vertices];
+    for (int i = 0; i < vertices; i++) {
         distance[i] = INF;
     }
     distance[start] = 0;
 
-    // (V-1)번 반복하면서 각 간선을 모두 검사
-    for (int i = 0; i < g->n - 1; i++) {
-        for (int u = 0; u < g->n; u++) {
-            for (int v = 0; v < g->n; v++) {
-                if (g->weight[u][v] != INF) {
-                    if (distance[u] != INF && distance[v] > distance[u] + g->weight[u][v]) {
-                        distance[v] = distance[u] + g->weight[u][v];
-                    }
-                }
+    // 벨만-포드 알고리즘의 핵심 반복문
+    for (int k = 0; k < vertices - 1; k++) {
+        for (int i = 0; i < edges; i++) {
+            int u = edgeList[i].u;
+            int v = edgeList[i].v;
+            int weight = edgeList[i].weight;
+            if (distance[u] != INF && distance[u] + weight < distance[v]) {
+                distance[v] = distance[u] + weight;
             }
         }
-        print_status(g);
     }
 
-    // 음의 가중치 순환 검사
-    for (int u = 0; u < g->n; u++) {
-        for (int v = 0; v < g->n; v++) {
-            if (g->weight[u][v] != INF && distance[v] > distance[u] + g->weight[u][v]) {
-                printf("Graph contains a negative-weight cycle\n");
-                return;
-            }
+    // 음의 사이클 검출
+    for (int i = 0; i < edges; i++) {
+        int u = edgeList[i].u;
+        int v = edgeList[i].v;
+        int weight = edgeList[i].weight;
+        if (distance[u] != INF && distance[u] + weight < distance[v]) {
+            printf("Graph contains a negative-weight cycle\n");
+            return;
+        }
+    }
+
+    // 결과 출력
+    printf("Vertex   Distance from Source\n");
+    for (int i = 0; i < vertices; i++) {
+        if (distance[i] == INF) {
+            printf("%d \t\t INF\n", i);
+        } else {
+            printf("%d \t\t %d\n", i, distance[i]);
         }
     }
 }
 
 int main() {
-    GraphType g = {
-        7,
-        {{ 0, 7, INF, INF, 3, 10, INF },
-        { 7, 0, 4, 10, 2, 6, INF },
-        { INF, 4, 0, 2, INF, INF, INF },
-        { INF, 10, 2, 0, 11, 9, 4 },
-        { 3, 2, INF, 11, 0, INF, 5 },
-        { 10, 6, INF, 9, INF, 0, INF },
-        { INF, INF, INF, 4, 5, INF, 0 }}
+    int vertices = 5;
+    int edges = 8;
+    struct Edge edgeList[] = {
+        {0, 1, -1}, {0, 2, 4}, {1, 2, 3}, {1, 3, 2}, {1, 4, 2},
+        {3, 2, 5}, {3, 1, 1}, {4, 3, -3}
     };
 
-    bellman_ford(&g, 0);
+    bellmanFord(vertices, edges, edgeList, 0);
     return 0;
 }
