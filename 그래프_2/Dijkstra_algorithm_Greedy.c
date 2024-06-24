@@ -46,7 +46,7 @@ void Dijkstra(GraphType *g, int start) {
     int u;
     /* 변수로 받은 시작 정점부터 다른 정점까지의 거리 초기화
        동시에 found[] 초기화 */
-    for (int i = 0; i < g->n; i++) {
+    for (int i = 0; i < g->n; i++) {    
         distance[i] = g->weight[start][i];  // 맨 처음 시작 정점을 기준으로 인접 정점들까지의 거리를 저장
         found[i] = FALSE;
     }

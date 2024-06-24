@@ -37,14 +37,13 @@ void floyd(GraphType *g) {
     printA(g);
 }
 int main() {
-    GraphType g = { 7,
-    {{ 0, 7, INF, INF, 3, 10, INF },
-    {7, 0, 4, 10, 2, 6, INF },
-    {INF, 4, 0, 2, INF, INF, INF },
-    {INF, 10, 2, 0, 11, 9, 4 },
-    {3, 2, INF, 11, 0, INF, 5},
-    {10, 6, INF, 9, INF, 0, INF},
-    {INF, INF, INF, 4, 5, INF, 0} }
+    GraphType g = { 6,
+    {{ 0, 50, 45, 10, INF, INF },
+    {INF, 0, 10, 15, INF, INF },
+    {INF, INF, 0, INF, 30, INF },
+    {20, INF, INF, 0, 15, INF },
+    {INF, 20, 35, INF, 0, INF },
+    {INF, INF, INF, INF, 3, 0 }, }
     };
     floyd(&g);
     

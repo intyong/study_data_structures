@@ -6,7 +6,7 @@ int list[MAX_SIZE];
 int n;
 int sorted[MAX_SIZE];
 void merge(int list[], int left, int mid, int right) {
-    int i, j, k, l;
+    int i, j, k;
     i = left;
     j = mid + 1;
     k = left;   // sorted[]를 위한 인덱스
@@ -15,12 +15,12 @@ void merge(int list[], int left, int mid, int right) {
         else sorted[k++] = list[j++];
     }
     if (i > mid) {
-        for (l = j; l <= right; l++) sorted[k++] = list[l];
+        for (int l = j; l <= right; l++) sorted[k++] = list[l];
     }
     else {
-        for (l = i; l <= mid; l++) sorted[k++] = list[l];
+        for (int l = i; l <= mid; l++) sorted[k++] = list[l];
     }
-    for (l = left; l <= right; l++) {
+    for (int l = left; l <= right; l++) {
         list[l] = sorted[l];
     }
     for (int i = 0; i < MAX_SIZE; i++) {
