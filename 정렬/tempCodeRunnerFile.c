@@ -1,1 +1,0 @@
- && low < MAX_SIZE
